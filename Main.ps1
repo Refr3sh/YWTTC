@@ -9,7 +9,6 @@ param ([string]$SourceLnk, [string]$DestinationPath, [string]$Arguments, [string
 }
 
 $CPUArch = Write-Output "$env:PROCESSOR_ARCHITECTURE"
-$StartFolder = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 $DownloadLoc = "$env:USERPROFILE\AppData\Local\DCode"
 $URLAllFonts = "https://github.com/Refr3sh/YWTTC/raw/main/Font.zip"
 $URLFont = "https://raw.githubusercontent.com/Refr3sh/YWTTC/main/Font.ps1"
@@ -34,44 +33,21 @@ If(!($ChkQuiet -eq $True)){
 	$web.DownloadString("$URLQuiet") > "$DownloadLoc\Quiet.ps1"
     Remove-Variable web
 }
-If($ChkQuiet -eq $True){
-    If($CPUArch -eq 'AMD64'){
-    Set-Shortcut "$StartFolder\Quiet.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Quiet.ps1"' '%localappdata%'
-    }else{
-    Set-Shortcut "$StartFolder\Quiet.lnk" 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Quiet.ps1"' '%localappdata%'
-    }
-}else{
-	Write-Output 'Something went wrong while cleaning up'
-	Pause
-	Exit
-}
 
 ##Font
 $ChkFont = Test-Path "$DownloadLoc\Font.ps1"
 If(!($ChkFont -eq $True)){
     $web = New-Object System.Net.WebClient
 	$web.DownloadString("$URLFont") > "$DownloadLoc\Font.ps1"
-    Remove-Variable web
-	Start-BitsTransfer -Source $URLAllFonts -Destination $DownloadLoc
+    Start-BitsTransfer -Source $URLAllFonts -Destination $DownloadLoc
 	Expand-Archive -LiteralPath "$DownloadLoc\Font.zip" -DestinationPath "$DownloadLoc\Font"
 	Remove-Item "$DownloadLoc\Font.zip" -Force
-}
-If($ChkFont -eq $True){
-    If($CPUArch -eq 'AMD64'){
-    Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Font.ps1"' '%localappdata%'
-    }else{
-    Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Font.ps1"' '%localappdata%'
-    }
-	&"$DownloadLoc\Font.ps1" -WindowStyle Hidden
-}else{
-	Write-Output 'Something went wrong while installing fonts'
-	Pause
-	Exit
+    Remove-Variable web
 }
 
 ##ExcelMacro
 $LookForMacro = Test-Path "$MacroDest\CtinMacro.xlam"
-$LookForOM = Test-Path "$MacroDest\OMTool*.xlam"
+#$LookForOM = Test-Path "$MacroDest\OMTool*.xlam"
 $LookForSh = Test-Path "$env:USERPROFILE\Desktop\EXCEL.lnk"
 If(!($LookForMacro -eq $true)){
 	Start-BitsTransfer -Source $MacroSource -Destination $MacroDest
@@ -94,3 +70,7 @@ If(!($LookForSh -eq $true)){
     Set-Shortcut "$Env:USERPROFILE\Desktop\EXCEL.lnk" "C:\Program Files (x86)\Microsoft Office\root\Office16\EXCEL.EXE"
     }
 }
+Start-Sleep 5
+&"$DownloadLoc\Font.ps1" -WindowStyle Hidden
+Start-Sleep 5
+&"$DownloadLoc\Quiet.ps1" -WindowStyle Hidden
