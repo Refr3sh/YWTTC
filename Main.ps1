@@ -17,7 +17,7 @@ $MacroSource = 'https://github.com/Refr3sh/YWTTC/raw/main/CtinMacro.zip'
 $MacroDest = "$Env:APPDATA\Microsoft\AddIns"
 
 ##ClearStart
-Remove-Item "$StartFolder\*" -Force
+Remove-Item "$StartFolder\*" -Force -ErrorAction SilentlyContinue
 
 ##DownloadFolder
 $ChkDownloadLoc = Test-Path $DownloadLoc
@@ -41,7 +41,7 @@ If(!($ChkFont -eq $True)){
 	$web.DownloadString("$URLFont") > "$DownloadLoc\Font.ps1"
     Start-BitsTransfer -Source $URLAllFonts -Destination $DownloadLoc
 	Expand-Archive -LiteralPath "$DownloadLoc\Font.zip" -DestinationPath "$DownloadLoc\Font"
-	Remove-Item "$DownloadLoc\Font.zip" -Force
+	Remove-Item "$DownloadLoc\Font.zip" -Force -ErrorAction SilentlyContinue
     Remove-Variable web
 }
 
@@ -52,7 +52,7 @@ $LookForSh = Test-Path "$env:USERPROFILE\Desktop\EXCEL.lnk"
 If(!($LookForMacro -eq $true)){
 	Start-BitsTransfer -Source $MacroSource -Destination $MacroDest
 	Expand-Archive -LiteralPath "$MacroDest\CtinMacro.zip" -DestinationPath $MacroDest
-	Remove-Item "$MacroDest\CtinMacro.zip" -Force
+	Remove-Item "$MacroDest\CtinMacro.zip" -Force -ErrorAction SilentlyContinue
 	Write-Output 'Activate CtinMacro AddIn in Excel'
     Write-Output 'For Using macros, save the Move Task query as .txt in default location (Documents)'
     Write-Output 'Then open EXCEL and press CTRL+F1 for barcodes and CTRL+F2 For Elvis'
