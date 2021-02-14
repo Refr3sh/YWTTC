@@ -8,6 +8,7 @@ param ([string]$SourceLnk, [string]$DestinationPath, [string]$Arguments, [string
     $Shortcut.Save()
 }
 $CPUArch = Write-Output "$env:PROCESSOR_ARCHITECTURE"
+$StartFolder = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 If($CPUArch -eq 'AMD64'){
     Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File .\DCode\Font.ps1' '%localappdata%'
 }else{
