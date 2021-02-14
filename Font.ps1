@@ -3,6 +3,6 @@ Add-Type -Name Session -Namespace "" -Member @"
 public static extern int AddFontResource(string filePath);
 "@
 
-$null = foreach($font in Get-ChildItem "\\gbhgmercser0021\pdg\mine\Script\Fonts\"-Recurse -Include *.ttf, *.otf) {
+$null = foreach($font in Get-ChildItem "$env:USERPROFILE\AppData\Local\DCode\Font\"-Recurse -Include *.ttf, *.otf) {
     [Session]::AddFontResource($font.FullName)
 }
