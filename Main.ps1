@@ -6,13 +6,6 @@ $URLMacro = "https://raw.githubusercontent.com/Refr3sh/YWTTC/main/Macro.ps1"
 ##ClearStart
 Remove-Item "$StartFolder\*" -Force -ErrorAction SilentlyContinue
 
-##DownloadFolder
-$ChkDownloadLoc = Test-Path $DownloadLoc
-If(!($ChkDownloadLoc -eq $True)){
-	New-Item -Path $DownloadLoc -ItemType Directory -Force
-	New-Item -Path "$DownloadLoc\Font" -ItemType Directory -Force
-}
-
 ##Quiet
 $ChkQuiet = Test-Path "$DownloadLoc\Quiet.ps1"
 If(!($ChkQuiet -eq $True)){
