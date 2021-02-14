@@ -4,5 +4,5 @@ Start-Sleep 5
 $makequiet = "*authman*", "*concen*", "*wfcrun*", "*redirect*", "*selfservicePlug*", "*receiver*", "*chrome*", "*lync*", "*teams*", "*pnamain*"
   foreach( $process in $makequiet )
    {
-    Stop-Process -name $makequiet -Force -Verbose
+    Stop-Process -name $makequiet -Force -ErrorAction SilentlyContinue
    }
