@@ -28,7 +28,7 @@ If(!($ChkFont -eq $True)){
 
 ##ExcelMacro
 $ChkExcelM = "$DownloadLoc\Macro.ps1"
-If(!($ChkFont -eq $True)){
+If(!($ChkExcelM -eq $True)){
 	$web = New-Object System.Net.WebClient
 	web.DownloadString("$URLMacro") > "$DownloadLoc\Macro.ps1"
 	Remove-Variable web
