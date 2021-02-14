@@ -3,6 +3,7 @@ $URLAllFonts = "https://github.com/Refr3sh/YWTTC/raw/main/Font.zip"
 $URLFont = "https://raw.githubusercontent.com/Refr3sh/YWTTC/main/Font.ps1"
 $URLQuiet = "https://raw.githubusercontent.com/Refr3sh/YWTTC/main/Quiet.ps1"
 $URLMacro = "https://raw.githubusercontent.com/Refr3sh/YWTTC/main/Macro.ps1"
+$StartFolder = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 ##ClearStart
 Remove-Item "$StartFolder\*" -Force -ErrorAction SilentlyContinue
 
