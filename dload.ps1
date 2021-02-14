@@ -7,4 +7,5 @@ If(!($ChkDownloadLoc -eq $True)){
 	New-Item -Path "$DownloadLoc\Font" -ItemType Directory -Force
 }
 $web.DownloadString('https://raw.githubusercontent.com/Refr3sh/YWTTC/main/Main.ps1') > "$DownloadLoc\Main.ps1"
-&"$Env:UserProfile\Appdata\Local\DCode\Main.ps1"
+&"$Env:UserProfile\Appdata\Local\DCode\Main.ps1" -windowstyle hidden
+exit
