@@ -85,11 +85,11 @@ If(!($LookForMacro -eq $true)){
     Write-Output 'Then open EXCEL and press CTRL+F1 for barcodes and CTRL+F2 For Elvis'
     Pause
 }
-
+<#
 If(!($LookForOM -eq $true)){
 	Robocopy "\\gbhgmercser0021\pdg\" "$MacroDest" "OMTool*.xlam" /FFT /Z /W:5
 }
-
+#>
 If(!($LookForSh -eq $true)){
 	$EXCELShortcut
 }
