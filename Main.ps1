@@ -11,25 +11,11 @@ param ([string]$SourceLnk, [string]$DestinationPath, [string]$Arguments, [string
 $CPUArch = Write-Output "$env:PROCESSOR_ARCHITECTURE"
 $StartFolder = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 $DownloadLoc = "$env:USERPROFILE\AppData\Local\DCode"
-$web = New-Object System.Net.WebClient
 $URLAllFonts = "https://github.com/Refr3sh/YWTTC/raw/main/Font.zip"
 $URLFont = "https://raw.githubusercontent.com/Refr3sh/YWTTC/main/Font.ps1"
 $URLQuiet = "https://raw.githubusercontent.com/Refr3sh/YWTTC/main/Quiet.ps1"
 $MacroSource = 'https://github.com/Refr3sh/YWTTC/raw/main/CtinMacro.zip'
 $MacroDest = "$Env:APPDATA\Microsoft\AddIns"
-
-
-
-##SetShortcuts
-If($CPUArch -eq 'AMD64'){
-	$ShortcutQuiet = Set-Shortcut "$StartFolder\Quiet.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Quiet.ps1"' '%localappdata%'
-	$ShortcutFont = Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Font.ps1"' '%localappdata%'
-	$EXCELShortcut = Set-Shortcut "$Env:USERPROFILE\Desktop\EXCEL.lnk" "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
-}else{
-	$ShortcutQuiet = Set-Shortcut "$StartFolder\Quiet.lnk" 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Quiet.ps1"' '%localappdata%'
-	$ShortcutFont = Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Font.ps1"' '%localappdata%'
-	$EXCELShortcut = Set-Shortcut "$Env:USERPROFILE\Desktop\EXCEL.lnk" "C:\Program Files (x86)\Microsoft Office\root\Office16\EXCEL.EXE"
-}
 
 ##ClearStart
 Remove-Item "$StartFolder\*" -Force
@@ -44,11 +30,16 @@ If(!($ChkDownloadLoc -eq $True)){
 ##Quiet
 $ChkQuiet = Test-Path "$DownloadLoc\Quiet.ps1"
 If(!($ChkQuiet -eq $True)){
+    $web = New-Object System.Net.WebClient
 	$web.DownloadString("$URLQuiet") > "$DownloadLoc\Quiet.ps1"
+    Remove-Variable web
 }
 If($ChkQuiet -eq $True){
-#	&"$DownloadLoc\Quiet.ps1" -WindowStyle Hidden
-	$ShortcutQuiet
+    If($CPUArch -eq 'AMD64'){
+    Set-Shortcut "$StartFolder\Quiet.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Quiet.ps1"' '%localappdata%'
+    }else{
+    Set-Shortcut "$StartFolder\Quiet.lnk" 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Quiet.ps1"' '%localappdata%'
+    }
 }else{
 	Write-Output 'Something went wrong while cleaning up'
 	Pause
@@ -58,14 +49,20 @@ If($ChkQuiet -eq $True){
 ##Font
 $ChkFont = Test-Path "$DownloadLoc\Font.ps1"
 If(!($ChkFont -eq $True)){
+    $web = New-Object System.Net.WebClient
 	$web.DownloadString("$URLFont") > "$DownloadLoc\Font.ps1"
+    Remove-Variable web
 	Start-BitsTransfer -Source $URLAllFonts -Destination $DownloadLoc
 	Expand-Archive -LiteralPath "$DownloadLoc\Font.zip" -DestinationPath "$DownloadLoc\Font"
 	Remove-Item "$DownloadLoc\Font.zip" -Force
 }
 If($ChkFont -eq $True){
+    If($CPUArch -eq 'AMD64'){
+    Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Font.ps1"' '%localappdata%'
+    }else{
+    Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File ".\DCode\Font.ps1"' '%localappdata%'
+    }
 	&"$DownloadLoc\Font.ps1" -WindowStyle Hidden
-	$ShortcutFont
 }else{
 	Write-Output 'Something went wrong while installing fonts'
 	Pause
@@ -91,5 +88,9 @@ If(!($LookForOM -eq $true)){
 }
 #>
 If(!($LookForSh -eq $true)){
-	$EXCELShortcut
+    If($CPUArch -eq 'AMD64'){
+    Set-Shortcut "$Env:USERPROFILE\Desktop\EXCEL.lnk" "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
+    }else{
+    Set-Shortcut "$Env:USERPROFILE\Desktop\EXCEL.lnk" "C:\Program Files (x86)\Microsoft Office\root\Office16\EXCEL.EXE"
+    }
 }
