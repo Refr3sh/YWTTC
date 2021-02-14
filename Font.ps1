@@ -9,9 +9,9 @@ param ([string]$SourceLnk, [string]$DestinationPath, [string]$Arguments, [string
 }
 $CPUArch = Write-Output "$env:PROCESSOR_ARCHITECTURE"
 If($CPUArch -eq 'AMD64'){
-    Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' "-ExecutionPolicy Bypass -WindowStyle Hidden -File '.\DCode\Font.ps1'" '%localappdata%'
+    Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File .\DCode\Font.ps1' '%localappdata%'
 }else{
-    Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' "-ExecutionPolicy Bypass -WindowStyle Hidden -File '.\DCode\Font.ps1'" '%localappdata%'
+    Set-Shortcut "$StartFolder\Font.lnk" 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' '-ExecutionPolicy Bypass -WindowStyle Hidden -File .\DCode\Font.ps1' '%localappdata%'
 }
 Add-Type -Name Session -Namespace "" -Member @"
 [DllImport("gdi32.dll")]
