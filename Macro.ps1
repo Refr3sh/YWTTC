@@ -21,7 +21,7 @@ $LookForSh = Test-Path "$env:USERPROFILE\Desktop\EXCEL.lnk"
 
 Start-BitsTransfer -Source "$MacroSource" -Destination "$DownloadLoc"
 Expand-Archive -Path "$DownloadLoc\CtinMacro.zip" -Destination "$DownloadLoc"
-Robocopy "$DownloadLoc" "$MacroDest" "CtinMacro.xlam" /Z /W:5
+Robocopy "$DownloadLoc" "$MacroDest" "CtinMacro.xlam" /MIR /Z /W:5
 $EXCEL = Get-Process EXCEL -ErrorAction SilentlyContinue
 If($EXCEL){
   $EXCEL.CloseMainWindow()
@@ -33,9 +33,8 @@ If($EXCEL){
 Remove-Variable EXCEL
  Write-Output 'Activate CtinMacro AddIn in Excel'
  Write-Output 'For Using macros, save the Move Task query as .txt in default location (Documents)'
- Write-Output 'Then open EXCEL and press CTRL+F1 for barcodes and CTRL+F2 For Elvis'
+ Write-Output 'Then open EXCEL and press CTRL+F1 for barcodes and CTRL+F4 For Elvis'
 Pause
-
 
 If(!($LookForSh -eq $true)){
     If($CPUArch -eq 'AMD64'){
