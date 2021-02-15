@@ -24,7 +24,7 @@ Expand-Archive -Path "$DownloadLoc\CtinMacro.zip" -Destination "$MacroDest\"
 Remove-Item "$DownloadLoc\CtinMacro.zip" -Force -ErrorAction SilentlyContinue
  Write-Output 'Activate CtinMacro AddIn in Excel'
  Write-Output 'For Using macros, save the Move Task query as .txt in default location (Documents)'
- Write-Output 'Then open EXCEL and press CTRL+F1 for barcodes and CTRL+F4 For Elvis'
+ Write-Output 'Then open EXCEL and press ALT+F1 for barcodes and ALT+F4 For Elvis'
 Pause
 $LookForSh = Test-Path "$env:USERPROFILE\Desktop\EXCEL.lnk"
 If(!($LookForSh -eq $true)){
