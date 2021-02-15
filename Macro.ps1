@@ -21,7 +21,7 @@ $LookForSh = Test-Path "$env:USERPROFILE\Desktop\EXCEL.lnk"
 
 Start-BitsTransfer -Source "$MacroSource" -Destination "$DownloadLoc"
 Expand-Archive -Path "$DownloadLoc\CtinMacro.zip" -Destination "$DownloadLoc"
-Robocopy "$DownloadLoc" "$MacroDest" "CtinMacro.xlam" /FFT /Z /W:5
+Robocopy "$DownloadLoc" "$MacroDest" "CtinMacro.xlam" /Z /W:5
 $EXCEL = Get-Process EXCEL -ErrorAction SilentlyContinue
 If($EXCEL){
   $EXCEL.CloseMainWindow()
