@@ -1,5 +1,7 @@
 # YWTTC = You Won This Time Cameron!
 #### But we all know who's gonna be the ultimate winner!!
+
+Install:
 ```powershell
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Refr3sh/YWTTC/main/dload.ps1'))
 ```
