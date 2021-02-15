@@ -8,13 +8,14 @@ param ([string]$SourceLnk, [string]$DestinationPath, [string]$Arguments, [string
     $Shortcut.Save()
 }
 
-$URLFontUninst = "https://github.com/Refr3sh/YWTTC/raw/main/un/Uninst.ps1"
+$URLFontUninst = "https://raw.githubusercontent.com/Refr3sh/YWTTC/main/un/Uninst.ps1"
 $StartFolder = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 $DownloadLoc = "$env:USERPROFILE\AppData\Local\DCode"
 $MacroDest = "$Env:APPDATA\Microsoft\AddIns"
 $web = New-Object System.Net.WebClient
 
-Remove-Item "$StartFolder\*" -Force -ErrorAction SilentlyContinue
+Remove-Item "$StartFolder\Font.lnk" -Force -ErrorAction SilentlyContinue
+Remove-Item "$StartFolder\Quiet.lnk" -Force -ErrorAction SilentlyContinue
 Remove-Item "$DownloadLoc\*" -Force -Recurse -ErrorAction SilentlyContinue
 $web.DownloadString("$URLFontUninst") > "$env:USERPROFILE\AppData\Local\Uninst.ps1"
 
