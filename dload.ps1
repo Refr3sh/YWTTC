@@ -14,7 +14,7 @@ Remove-Variable EXCEL
 
 Remove-Item "$MacroDest\CtinMacro.*" -Force -ErrorAction SilentlyContinue
 Remove-Item "$DownloadLoc\CtinMacro.*" -Force -ErrorAction SilentlyContinue
-Remove-Item "$DownloadLoc\*.ps1" -Force -ErrorAction SilentlyContinue
+
 ##DownloadFolder
 $ChkDownloadLoc = Test-Path "$DownloadLoc"
 If(!($ChkDownloadLoc -eq $True)){
