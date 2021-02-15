@@ -21,7 +21,7 @@ If(!($ChkFont -eq $True)){
     $web = New-Object System.Net.WebClient
 	$web.DownloadString("$URLFont") > "$DownloadLoc\Font.ps1"
     	Start-BitsTransfer -Source "$URLAllFonts" -Destination "$DownloadLoc"
-	Expand-Archive -Path "$DownloadLoc\Font.zip" -Destination "$DownloadLoc\Font"
+	Expand-Archive -Path "$DownloadLoc\Font.zip" -Destination "$DownloadLoc\Font" -ErrorAction SilentlyContinue
 	Remove-Item "$DownloadLoc\Font.zip" -Force -ErrorAction SilentlyContinue
     Remove-Variable web
 }
