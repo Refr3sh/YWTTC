@@ -10,8 +10,10 @@ do
 {   If( [bool]([PsOneApi.Keyboard]::GetAsyncKeyState($key) -eq -32767))
         {
             [System.Windows.Forms.SendKeys]::SendWait(" ")
-            Start-Sleep -Milliseconds 200
+            Start-Sleep -Milliseconds 50
             [System.Windows.Forms.SendKeys]::SendWait('^{p}')
+            Start-Sleep -Milliseconds 50
+            [System.Windows.Forms.SendKeys]::SendWait('{ENTER}')
         }
     
       Start-Sleep -Milliseconds 100
