@@ -5,7 +5,6 @@ $Signature = @'
     public static extern short GetAsyncKeyState(int virtualKeyCode); 
 '@
 Add-Type -MemberDefinition $Signature -Name Keyboard -Namespace PsOneApi
-Add-Type -AssemblyName System.Windows.Forms
 do
 {   If( [bool]([PsOneApi.Keyboard]::GetAsyncKeyState($key) -eq -32767))
         {
